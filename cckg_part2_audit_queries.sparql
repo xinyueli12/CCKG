@@ -1,0 +1,71 @@
+# =====================================================================
+# CCKG Part 2 audit register -- CORRECTED (v2)
+#
+# FIXES applied against the v1 query in cckg_part2_audit_queries.sparql:
+#
+# 1. v1's inner subquery excluded BurnoutWPG1 via FILTER(?c != cckg:BurnoutWPG1),
+#    then INNER-joined the outer ProxyMapping list to that filtered result.
+#    Consequence: the two mappings whose target construct IS BurnoutWPG1
+#    (ConsecutiveHighLoadCount, InterWindowGap) had no row to join to and
+#    were silently dropped -- 5 mappings in, 3 rows out, no error, no flag.
+#    This is exactly the failure mode the register exists to prevent.
+#
+# 2. Conceptually, Part 2 (within-SOPS coherence) tests whether a mapping's
+#    TARGET construct correlates with Burnout as JD-R predicts. For a
+#    mapping whose target already IS Burnout, there is no second construct
+#    to correlate against -- Part 2 does not apply to it BY DESIGN, not by
+#    accident. This query now reports that explicitly instead of omitting
+#    the row. Those two mappings are validated instead by Part 1
+#    (within-MIMIC coherence: do ConsecutiveHighLoadCount and InterWindowGap
+#    covary with each other as Effort-Recovery predicts).
+#
+# Requires: schema v4 + cckg-instances-sops.ttl +
+#           cckg-instances-sops-constructs-v2.ttl (the deduplicated version;
+#           running this against the v1 constructs file will still double
+#           the 3 rows whose target is Staffing or Handoffs).
+# =====================================================================
+PREFIX cckg: <http://knacc.umbc.edu/ontologies/cckg#>
+SELECT ?proxy ?constructName ?predicted ?provenance ?part2Status ?n ?observed
+       (IF(!BOUND(?n), "N/A -- target is the Burnout anchor; see Part 1",
+           IF(?predicted = ?observed, "HOLDS", "FAILS")) AS ?verdict)
+WHERE {
+  ?pm a cckg:ProxyMapping ;
+      cckg:ProxyPropertyName ?proxy ;
+      cckg:PredictedDirection ?predicted ;
+      cckg:ProvenanceType ?provenance ;
+      cckg:mapsToConstruct ?c .
+  ?c cckg:ConstructName ?constructName .
+
+  BIND(IF(?c = cckg:BurnoutWPG1,
+          "not applicable (target is the anchor construct)",
+          "applicable") AS ?part2Status)
+
+  OPTIONAL {
+    SELECT ?c (COUNT(*) AS ?n)
+           (IF((COUNT(*) * SUM(?x * ?y)) - (SUM(?x) * SUM(?y)) < 0,
+               "negative", "positive") AS ?observed)
+    WHERE {
+      ?h a cckg:HospitalContext ; cckg:hasSurveyEvent ?ex , ?ey .
+      ?ex cckg:hasConstructMeasurement ?mx .
+      ?mx cckg:measuresConstruct ?c ; cckg:PercentPositive ?x .
+      ?ey cckg:hasConstructMeasurement ?my .
+      ?my cckg:measuresConstruct cckg:BurnoutWPG1 ; cckg:PercentPositive ?y .
+      FILTER(?c != cckg:BurnoutWPG1)
+    }
+    GROUP BY ?c
+  }
+}
+ORDER BY ?proxy
+
+# Expected: 5 rows, always -- every pre-registered mapping is represented
+# regardless of whether Part 2 could compute a correlation for it.
+#   AcuityWeightedLoad       -> Staffing and Work Pace   : HOLDS (n=38)
+#   ConsecutiveHighLoadCount -> Work Stress/Burnout(WPG1): N/A -- target is anchor
+#   DocumentationIntensity   -> Staffing and Work Pace   : HOLDS (n=38)
+#   InterWindowGap           -> Work Stress/Burnout(WPG1): N/A -- target is anchor
+#   UniqueStayCount          -> Handoffs and Info Exch.  : HOLDS (n=38) --
+#     n.b. this HOLDS is a Part-2 result on the *target construct*, and is
+#     separate from the untestable-by-construction status the proxy itself
+#     carries (see rdfs:comment on PM_UniqueStays_Handoffs). Report both:
+#     the construct-side theory checks out; the proxy that would exercise it
+#     still cannot be computed from MIMIC-III.

@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:cckg="http://knacc.umbc.edu/ontologies/cckg#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#PM_AcuityLoad_Staffing">
+    <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <cckg:ProxyPropertyName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AcuityWeightedLoad</cckg:ProxyPropertyName>
+    <cckg:Assumption rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOFA-weighted event load indexes demand intensity; higher load predicts lower staffing percent-positive.</cckg:Assumption>
+    <cckg:ProvenanceType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">engineered</cckg:ProvenanceType>
+    <cckg:PredictedDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">negative</cckg:PredictedDirection>
+    <cckg:mapsToConstruct>
+      <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#StaffingAndWorkPace">
+        <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+        <cckg:ConstructName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Staffing and Work Pace</cckg:ConstructName>
+        <cckg:ItemCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</cckg:ItemCount>
+        <cckg:JDRClassification rdf:datatype="http://www.w3.org/2001/XMLSchema#string">resource</cckg:JDRClassification>
+        <cckg:MeasurementType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">composite</cckg:MeasurementType>
+      </owl:NamedIndividual>
+    </cckg:mapsToConstruct>
+  </owl:NamedIndividual>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#FormulaVersion">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: Version tag; formula will be revised after team scope meeting</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#PM_InterWindowGap_Burnout">
+    <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <cckg:ProxyPropertyName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterWindowGap</cckg:ProxyPropertyName>
+    <cckg:Assumption rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Effort-Recovery: shorter inter-window gaps mean insufficient recovery; gap length predicts burnout severity negatively (longer gap, lower burnout).</cckg:Assumption>
+    <cckg:ProvenanceType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">normative</cckg:ProvenanceType>
+    <cckg:PredictedDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">negative</cckg:PredictedDirection>
+    <cckg:mapsToConstruct>
+      <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#BurnoutWPG1">
+        <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+        <cckg:ConstructName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Work Stress/Burnout (WPG1)</cckg:ConstructName>
+        <cckg:ItemCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</cckg:ItemCount>
+        <cckg:JDRClassification rdf:datatype="http://www.w3.org/2001/XMLSchema#string">outcome</cckg:JDRClassification>
+        <cckg:MeasurementType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">single-item</cckg:MeasurementType>
+      </owl:NamedIndividual>
+    </cckg:mapsToConstruct>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#ManagementSupportPatientSafety">
+    <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+    <cckg:ConstructName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hospital Management Support for Patient Safety</cckg:ConstructName>
+    <cckg:ItemCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3</cckg:ItemCount>
+    <cckg:JDRClassification rdf:datatype="http://www.w3.org/2001/XMLSchema#string">resource</cckg:JDRClassification>
+    <cckg:MeasurementType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">composite</cckg:MeasurementType>
+  </owl:NamedIndividual>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ResponseRate">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#HospitalContext"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: SOPS RESPONSERATE</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#assessmentOf">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Caregiver"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#RecoveryInput">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Normalized recovery adequacy component</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#WindowEnd">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:comment>Source: Derived from CHARTTIME</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#SourceItemID">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ClinicalActivity"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: MIMIC-III ITEMID of the documented event</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ProcedureCount">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: Count of PROCEDUREEVENTS_MV rows per CGID-window</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#PM_UniqueStays_Handoffs">
+    <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <cckg:ProxyPropertyName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniqueStayCount</cckg:ProxyPropertyName>
+    <cckg:Assumption rdf:datatype="http://www.w3.org/2001/XMLSchema#string">More concurrent stays per window means more information exchange surfaces; higher count predicts lower handoffs percent-positive.</cckg:Assumption>
+    <cckg:ProvenanceType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">engineered</cckg:ProvenanceType>
+    <cckg:PredictedDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">negative</cckg:PredictedDirection>
+    <cckg:mapsToConstruct>
+      <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#HandoffsInformationExchange">
+        <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+        <cckg:ConstructName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Handoffs and Information Exchange</cckg:ConstructName>
+        <cckg:ItemCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3</cckg:ItemCount>
+        <cckg:JDRClassification rdf:datatype="http://www.w3.org/2001/XMLSchema#string">resource</cckg:JDRClassification>
+        <cckg:MeasurementType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">composite</cckg:MeasurementType>
+      </owl:NamedIndividual>
+    </cckg:mapsToConstruct>
+    <rdfs:comment>AUDIT STATUS: untestable-by-construction. UniqueStayCount is not computable (cross-patient simultaneity is foreclosed by per-patient date shifting) and is degenerate at its declared domain (one stay per EventAggregate). Reported in the construct-alignment register as untestable with reason; not silently dropped, not redefined.</rdfs:comment>
+  </owl:NamedIndividual>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#hasConstructMeasurement">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyEvent"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ConstructMeasurement"/>
+    <rdfs:comment>Links a survey administration to the values it reported.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#BurnoutPct3Plus">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#HospitalContext"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Pct respondents scoring 3+ on WPG1 (computed from individual file)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ProvenanceType">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: empirical | normative | engineered</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#hasSurveyEvent">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#HospitalContext"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyEvent"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#DemandInput">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Normalized demand component</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#MeasuredPercentPositive">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ConstructMeasurement"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Percent-positive response for this hospital-wave-construct, normalised to 0-100 across instruments.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#hasStay">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Patient"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#WindowStart">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:comment>Source: Derived from CHARTTIME</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#UnitName">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#CareUnit"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: MIMIC-III ICUSTAYS.FIRST_CAREUNIT</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#involvesStay">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#assessmentFrom">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:comment>The EventAggregate whose feature values were used to compute this assessment. Makes the score's provenance a single asserted edge rather than a join over assessedIn + assessmentOf.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#OutTime">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:comment>Source: MIMIC-III ICUSTAYS.OUTTIME</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#CGID">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Caregiver"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: MIMIC-III CAREGIVERS.CGID</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#InstrumentVersion">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyEvent"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: HSOPS-1.0 | HSOPS-2.0 | WPS. Mandatory: makes the temporalNext same-version constraint auditable. SurveyQuarter cannot substitute; the 1.0 and 2.0 collection windows overlap (Dec 2017 - Oct 2020 vs Nov 2018 - Oct 2020)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#SourceColumn">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ConstructMeasurement"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source file column name, for provenance.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#WindowType">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: day | night (0600/1800 boundaries)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#PM_ConsecHighLoad_Burnout">
+    <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <cckg:ProxyPropertyName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ConsecutiveHighLoadCount</cckg:ProxyPropertyName>
+    <cckg:Assumption rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JD-R plus Effort-Recovery: sustained high-demand sequences without recovery amplify strain; count predicts burnout severity positively.</cckg:Assumption>
+    <cckg:ProvenanceType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">normative</cckg:ProvenanceType>
+    <cckg:PredictedDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">positive</cckg:PredictedDirection>
+    <cckg:mapsToConstruct rdf:resource="http://knacc.umbc.edu/ontologies/cckg#BurnoutWPG1"/>
+  </owl:NamedIndividual>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#LeavePctAnyYes">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#HospitalContext"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Pct WPBQ2 != No (computed from individual file)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ResourceInput">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Normalized resource adequacy component</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#PM_DocIntensity_Staffing">
+    <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <cckg:ProxyPropertyName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DocumentationIntensity</cckg:ProxyPropertyName>
+    <cckg:Assumption rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Documentation volume per window indexes task demand; higher intensity predicts lower hospital staffing percent-positive.</cckg:Assumption>
+    <cckg:ProvenanceType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">engineered</cckg:ProvenanceType>
+    <cckg:PredictedDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">negative</cckg:PredictedDirection>
+    <cckg:mapsToConstruct rdf:resource="http://knacc.umbc.edu/ontologies/cckg#StaffingAndWorkPace"/>
+  </owl:NamedIndividual>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ActivityTimestamp">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ClinicalActivity"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:comment>Source: CHARTTIME (or STARTTIME for procedures); valid within one stay's shifted clock</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#DocumentationIntensity">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Chart events per window</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#precedes">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+    <rdfs:comment>Temporal spine for time-series feature extraction. Constraint (enforced in population pipeline, not OWL): only between consecutive windows of the same caregiver within one stay's clock.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#occursInUnit">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#CareUnit"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#UniqueStayCount">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: DECLARED, NOT POPULATED (v4 correction). The original comment read 'Distinct ICUSTAY_ID per CGID-window', which is not computable and, at this domain, not informative. Two independent reasons. (a) The pre-registered Assumption on PM_UniqueStays_Handoffs is about CONCURRENT stays; establishing simultaneity requires comparing timestamps across patients, which MIMIC-III per-patient random date shifting forbids. (b) EventAggregate is scoped to exactly one ICUStay by construction (involvesStay is functional in practice), so distinct ICUSTAY_ID per EventAggregate is 1 for every instance: the property carries no variance and supports no correlation even under perfect calendar alignment. Retained in the schema so the pre-registered mapping remains auditable; reported as untestable-by-construction. Do not redefine post hoc.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ProxyPropertyName">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: Name of the EventAggregate data property being mapped</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#MeasurementType">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: composite | single-item. Single items (WPG1, WPBQ1, WPBQ2, WPF1) have no Cronbach's alpha or CFA; validity rests on AHRQ survey development.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#GapMonths">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyEvent"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Months elapsed since this hospital's previous SurveyEvent of the same InstrumentVersion; null for the first event in a chain</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#SurveyWave">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#HospitalContext"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: e.g., 2021/22 WPS; 2022 Hospital 2.0</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#RiskScore">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: demand x (1-resource) x (1-recovery)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ConsecutiveHighLoadCount">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: Consecutive windows above per-caregiver top-quartile threshold. Threshold is an engineered decision; see linked ProxyMapping.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ActivityType">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ClinicalActivity"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: Event category; from source table and D_ITEMS label of the ITEMID</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#StayID">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: MIMIC-III ICUSTAYS.ICUSTAY_ID</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#SubjectID">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: MIMIC-III ICUSTAYS.SUBJECT_ID</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#SourceFile">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ConstructMeasurement"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source file name, for provenance.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#contextualizedBy">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#HospitalContext"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#partOfStay">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ClinicalActivity"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#hasAggregate">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#EventCount">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: Count of CHARTEVENTS rows per CGID-window</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#executedBy">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ClinicalActivity"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Caregiver"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#JDRClassification">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: demand | resource | outcome (JD-R theory)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:NamedIndividual rdf:about="http://knacc.umbc.edu/ontologies/cckg#CommunicationOpenness">
+    <rdf:type rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+    <cckg:ConstructName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Communication Openness</cckg:ConstructName>
+    <cckg:ItemCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</cckg:ItemCount>
+    <cckg:JDRClassification rdf:datatype="http://www.w3.org/2001/XMLSchema#string">resource</cckg:JDRClassification>
+    <cckg:MeasurementType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">composite</cckg:MeasurementType>
+  </owl:NamedIndividual>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#temporalNext">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyEvent"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyEvent"/>
+    <rdfs:comment>Hospital-level trajectory spine (pattern adapted from Zeliatu's trajectory ontology). Constraint (enforced in population pipeline, not OWL): only between consecutive SurveyEvents of the same hospital AND the same InstrumentVersion. AHRQ HSOPS 1.0 and 2.0 scores are not comparable; cross-version chains produce instrument artifacts, not trajectories. Auditable via the InstrumentVersion property on both linked events.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ItemCount">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: Items in composite; 1 for single-item measures</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#LengthOfStay">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: MIMIC-III ICUSTAYS.LOS</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#PublicID">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#HospitalContext"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:comment>Source: SOPS PUBLICID</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#InTime">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:comment>Source: MIMIC-III ICUSTAYS.INTIME</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:Ontology rdf:about="http://knacc.umbc.edu/ontologies/cckg">
+    <rdfs:comment>Clinician-Centered Knowledge Graph (CCKG) schema, Phase 1. Caregiver-recentered ontology for ICU workforce analytics integrating MIMIC-III operational activity with AHRQ SOPS normative constructs. Structural patterns follow Walid et al. (2021, 2024): flat class hierarchy, PascalCase data properties, camelCase object properties, 100% domain/range specification. Ontology IRI is provisional pending lab confirmation.</rdfs:comment>
+    <owl:versionInfo>v5. Adds assessmentFrom (WellbeingRiskAssessment -&gt; EventAggregate) so risk-score provenance is asserted, not reconstructed. v4 corrections from the v3 structural audit: (1) belongsToWindow domain ClinicalActivity -&gt; EventAggregate, resolving a domain violation against populated data; (2) UniqueStayCount documented as declared-not-populated with both structural reasons; (3) PercentPositive deprecated in favour of ConstructMeasurement; (4) ConstructMeasurement class added for per-hospital-per-wave SOPS values; (5) ClinicalActivity flagged as declared-not-populated. Corrections are recorded, not silently applied.</owl:versionInfo>
+  </owl:Ontology>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#AcuityWeightedLoad">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: EventCount weighted by stay SOFA</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#Role">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Caregiver"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: MIMIC-III CAREGIVERS.DESCRIPTION (16 categories)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#performsActivityIn">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Caregiver"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#SourceTable">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ClinicalActivity"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: CHARTEVENTS | PROCEDUREEVENTS_MV | DATETIMEEVENTS (row-level provenance)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#PercentPositive">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: DEPRECATED in v4. A single slot on the construct cannot hold 38 hospital-specific values; per-hospital-per-wave values now live on ConstructMeasurement, reified over the (SurveyEvent, SurveyConstruct) pair. Retained only so existing queries do not break; do not populate.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#aggregateOf">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Caregiver"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#RoleLabel">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#Caregiver"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: MIMIC-III CAREGIVERS.LABEL (230 codes, traceability)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ValueScale">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ConstructMeasurement"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Native published scale: 'percent' or 'proportion'.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#measuresConstruct">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ConstructMeasurement"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+    <rdfs:comment>Links a reported value to the construct it measures.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#Assumption">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: The claim the mapping rests on, stated explicitly</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#belongsToWindow">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#ConstructName">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: SOPS composite/item name</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#SurveyQuarter">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyEvent"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: Calendar quarter of administration completion, e.g. 2022Q2; derived from SURVDATE or STARTMONTH/ENDMONTH</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#assessedIn">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#InterWindowGap">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#EventAggregate"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Hours between consecutive active windows (recovery signal)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#DailySOFA">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ICUStay"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:comment>Source: Computed via MIT-LCP/mimic-code SOFA script</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#mapsToConstruct">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <rdfs:range rdf:resource="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://knacc.umbc.edu/ontologies/cckg#PredictedDirection">
+    <rdfs:domain rdf:resource="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Source: positive | negative. Sign of predicted association between proxy value and the construct's stated pole. Pre-registered before population.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#EventAggregate">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Derived: per-caregiver per-window event summary from CHARTEVENTS, PROCEDUREEVENTS_MV, DATETIMEEVENTS. Workload and recovery proxies live here.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#SurveyEvent">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>One SOPS survey administration for one hospital (reified wave). Pattern adapted from Zeliatu's trajectory ontology: reifying each administration as a first-class temporal node enables hospital-level wellness trajectories via temporalNext ordering. Instance source: SOPS hospital files, one event per database submission (SURVDATE / STARTMONTH-ENDMONTH derive the quarter). InstrumentVersion is mandatory at population time: AHRQ states HSOPS 1.0 and 2.0 scores are not comparable, so trajectories are valid only within a single instrument version. Attachment of per-wave observed composite values is deliberately deferred to population design, pending the SOPS vintage decision.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#ProxyMapping">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Reified bridge edge. Carries the assumption, provenance type (empirical/normative/engineered), and pre-registered predicted direction for each operational proxy -&gt; SOPS construct mapping. PredictedDirection is written before graph population; the construct-alignment audit compares it against observed direction.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#WellbeingRiskAssessment">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Derived: one computed risk score per caregiver-window with its inputs retained for auditability. Formula: demand x (1 - resource adequacy) x (1 - recovery adequacy). MLLO MLTask target (Level 1 mapping row 5).</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#ConstructMeasurement">
+    <rdfs:comment>One SOPS composite or single-item value for one hospital in one survey administration. Reified because the value belongs to the (SurveyEvent, SurveyConstruct) pair. Replaces the deprecated global PercentPositive slot on SurveyConstruct.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#SurveyConstruct">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Instance source: AHRQ SOPS Hospital Survey 2.0 composites and WPS Supplement composites/items. MeasurementType distinguishes validated multi-item composites from single-item measures (WPG1, WPBQ1, WPBQ2, WPF1).</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#ClinicalActivity">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>DECLARED, NOT POPULATED at v4 (see MATERIALIZE_CLINICAL_ACTIVITY). One documented clinical activity (event-level task instance), following the agent-executes-task pattern of industrial process ontologies (IOF, referenced as architecture, not imported). Instance source: single rows of CHARTEVENTS, PROCEDUREEVENTS_MV, or DATETIMEEVENTS. Materialized for a cohort subsample only; full-scale features remain on EventAggregate. Answers the time-series representation question: each activity is a first-class node carrying its timestamp, windows partition activities, precedes orders windows.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#Caregiver">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Instance source: MIMIC-III CAREGIVERS (CGID, LABEL, DESCRIPTION). Exclude DESCRIPTION='Read Only'. MetaVision-active caregivers only.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#ICUStay">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Instance source: MIMIC-III ICUSTAYS filtered to DBSOURCE='metavision'.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#HospitalContext">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Instance source: SOPS hospital-level files (wps_composites_hospital_level.csv; N=38 usable WPS hospitals). Normative reference frame per survey wave. Deliberately NOT temporally linked to ActivityWindow: SOPS priors are contextual reference values, not synchronized observations.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#ActivityWindow">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Derived: 12-hour windows aligned 0600-1800 (day) / 1800-0600 (night), from CHARTTIME. Valid only within a single caregiver's sequence on a single stay's clock; MIMIC-III per-patient date shifting forbids cross-patient temporal comparison.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#Patient">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Instance source: MIMIC-III ICUSTAYS.SUBJECT_ID. Retained but secondary to Caregiver (entity recentering).</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://knacc.umbc.edu/ontologies/cckg#CareUnit">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:comment>Instance source: MIMIC-III ICUSTAYS.FIRST_CAREUNIT. Adult ICUs only: MICU, CSRU, SICU, CCU, TSICU. NICU excluded.</rdfs:comment>
+  </owl:Class>
+</rdf:RDF>

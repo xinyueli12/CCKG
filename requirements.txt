@@ -1,0 +1,12 @@
+# Versions recorded in the supplied workflow; not installed or verified here.
+# Python 3.13; Apache Jena Fuseki 6.1.0 (installed separately).
+numpy==2.1.3
+pandas==3.0.0
+scikit-learn==1.6.1
+xgboost==3.3.0
+# Exact versions were not supplied for the packages below.
+scipy
+shap
+rdflib
+requests
+pyreadstat

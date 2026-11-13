@@ -1,0 +1,157 @@
+# =====================================================================
+# CCKG Aim 1 demonstration artifact
+# Representative SPARQL query retrieving CCKG features in MLLO-compatible form
+#
+# CLAIM THIS SUPPORTS
+# The CCKG emits a construct-aligned, provenance-tagged, per-caregiver-window
+# feature matrix by query, in the shape a downstream ML or optimization
+# workflow consumes, without bespoke per-query ETL against raw MIMIC-III
+# files. It does NOT assign shifts and does not claim to: MIMIC-III
+# per-patient date shifting forecloses shift reconstruction. What is
+# demonstrated is that the graph supplies the objective-function input a
+# scheduler consumes, not the schedule.
+#
+# MLLO ALIGNMENT (Drobnjakovic et al. 2024)
+# The MLLO "ML data" area declares what any ML workflow needs regardless of
+# domain, and the "has data requirements" edge runs from ML algorithm back
+# to ML data. This query is the CCKG satisfying that edge:
+#   MLDataset      <- the result set itself, one row per training instance
+#   Feature        <- one column per selected variable, categorical or numeric
+#   DataPartition  <- ?windowStart / ?windowType, the temporal partition key
+#   DataLineage    <- ?sourceFile / ?sourceColumn / ?provenanceType
+#   DataQuality    <- ?auditStatus, carried per proxy from the register
+# Nothing in this query maps to MLLO's "ML algorithm" or "ML execution and
+# deployment" areas. That asymmetry is deliberate and is stated in III-D:
+# the CCKG is a data-layer contribution.
+#
+# EXECUTION
+# Requires schema v4 + step1 + step2 + SOPS + SOPS-constructs loaded into the
+# same Fuseki dataset. Q-A is the deliverable. Q-B and Q-C are the
+# provenance and register sidecars that make Q-A's columns self-describing.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# Q-A. FEATURE MATRIX (the deliverable)
+# One row per (caregiver, stay, window). Columns are the model-ready
+# features. Emits directly to CSV from Fuseki; no post-processing needed
+# beyond the ResourceAdequacy join described in the note below.
+# ---------------------------------------------------------------------
+PREFIX cckg: <http://knacc.umbc.edu/ontologies/cckg#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT
+  # --- identifiers / partition keys (MLLO: DataPartition) ---
+  ?caregiverID ?stayID ?windowStart ?windowType
+  # --- categorical features (MLLO: Feature, categorical) ---
+  ?role ?careUnit
+  # --- numeric demand features (MLLO: Feature, numeric) ---
+  ?eventCount ?documentationIntensity ?procedureCount
+  # --- numeric recovery features ---
+  ?interWindowGap ?consecutiveHighLoad
+  # --- stay context ---
+  ?lengthOfStay
+WHERE {
+  ?ea a cckg:EventAggregate ;
+      cckg:aggregateOf     ?cg ;
+      cckg:involvesStay    ?stay ;
+      cckg:belongsToWindow ?w ;
+      cckg:EventCount              ?eventCount ;
+      cckg:DocumentationIntensity  ?documentationIntensity ;
+      cckg:ProcedureCount          ?procedureCount ;
+      cckg:ConsecutiveHighLoadCount ?consecutiveHighLoad .
+
+  ?cg   cckg:CGID ?caregiverID ; cckg:Role ?role .
+  ?stay cckg:StayID ?stayID ; cckg:occursInUnit ?u .
+  ?u    cckg:UnitName ?careUnit .
+  ?w    cckg:WindowStart ?windowStart ; cckg:WindowType ?windowType .
+
+  # First window of a caregiver's sequence on a stay has no predecessor,
+  # so the gap is absent rather than zero. Left optional so the row is
+  # retained and the absence is visible to the pipeline as a null.
+  OPTIONAL { ?ea cckg:InterWindowGap ?interWindowGap }
+
+  # AcuityWeightedLoad is omitted: it depends on DailySOFA, which is
+  # computable via MIT-LCP mimic-code but deferred at this revision.
+  # Adding it is a column addition to this query, not a redesign.
+
+  OPTIONAL { ?stay cckg:LengthOfStay ?lengthOfStay }
+}
+ORDER BY ?caregiverID ?stayID ?windowStart
+
+# NOTE ON ResourceAdequacy.
+# The third term of the well-being-risk score is a hospital-level SOPS
+# quantity. MIMIC-III is single-institution and de-identified, so no
+# caregiver window can be attributed to a surveyed hospital and the term
+# cannot vary by row on real data. It is therefore supplied as a constant
+# reference value (Q-B), not joined per row. Emitting a per-row value here
+# would imply a linkage the data does not support.
+
+
+# ---------------------------------------------------------------------
+# Q-B. NORMATIVE REFERENCE VALUES (MLLO: Feature + DataLineage)  -- v2
+#
+# FIX: this block originally queried cckg:MeasuredPercentPositive, the
+# property name introduced when the schema was patched to v4. The data
+# that is actually loaded was generated before that patch and still writes
+# cckg:PercentPositive on ConstructMeasurement individuals. Schema and data
+# disagreed on a property name; the query returned zero rows with no error,
+# which is the same silent-failure shape as the two bugs fixed elsewhere
+# this session. Reverted to the property name that matches loaded data.
+# TECH DEBT: resolve properly at the next full population by regenerating
+# cckg-instances-sops-constructs-v2.ttl to emit MeasuredPercentPositive, and
+# updating this query and the Part 2 audit queries together at the same time
+# so schema and data never diverge on this name again.
+# ---------------------------------------------------------------------
+PREFIX cckg: <http://knacc.umbc.edu/ontologies/cckg#>
+SELECT ?constructName ?jdrClass ?instrument ?nHospitals
+       (AVG(?v) AS ?meanPercentPositive)
+       (MIN(?v) AS ?minPercentPositive)
+       (MAX(?v) AS ?maxPercentPositive)
+       (SAMPLE(?srcFile) AS ?sourceFile) (SAMPLE(?srcCol) AS ?sourceColumn)
+WHERE {
+  ?h a cckg:HospitalContext ; cckg:hasSurveyEvent ?e .
+  ?e cckg:InstrumentVersion ?instrument ;
+     cckg:hasConstructMeasurement ?m .
+  ?m cckg:measuresConstruct ?c ;
+     cckg:PercentPositive ?v ;
+     cckg:SourceFile ?srcFile ;
+     cckg:SourceColumn ?srcCol .
+  ?c cckg:ConstructName ?constructName ;
+     cckg:JDRClassification ?jdrClass .
+  { SELECT ?c (COUNT(DISTINCT ?h2) AS ?nHospitals) WHERE {
+      ?h2 cckg:hasSurveyEvent/cckg:hasConstructMeasurement ?m2 .
+      ?m2 cckg:measuresConstruct ?c .
+    } GROUP BY ?c }
+}
+GROUP BY ?constructName ?jdrClass ?instrument ?nHospitals
+ORDER BY ?jdrClass ?constructName
+
+
+# ---------------------------------------------------------------------
+# Q-C. FEATURE-TO-CONSTRUCT REGISTER (MLLO: DataQuality + DataLineage)
+# Makes Q-A's columns self-describing: for every feature that is a
+# registered proxy, returns the construct it is claimed to track, the
+# pre-registered direction, the provenance type, and the audit status.
+# This is what distinguishes the feature matrix from an arbitrary table of
+# counts, and it is the machine-readable form of the audit register.
+# ---------------------------------------------------------------------
+PREFIX cckg: <http://knacc.umbc.edu/ontologies/cckg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?featureColumn ?targetConstruct ?predictedDirection ?provenanceType
+       ?assumption ?auditStatus
+WHERE {
+  ?pm a cckg:ProxyMapping ;
+      cckg:ProxyPropertyName   ?featureColumn ;
+      cckg:PredictedDirection  ?predictedDirection ;
+      cckg:ProvenanceType      ?provenanceType ;
+      cckg:Assumption          ?assumption ;
+      cckg:mapsToConstruct     ?c .
+  ?c cckg:ConstructName ?targetConstruct .
+  OPTIONAL { ?pm rdfs:comment ?auditStatus }
+}
+ORDER BY ?featureColumn
+
+# Expected: 5 rows. Four carry a computable feature column present in Q-A.
+# PM_UniqueStays_Handoffs returns an ?auditStatus of
+# untestable-by-construction and has no corresponding Q-A column, which is
+# the intended behaviour: the register reports the gap rather than hiding it.
