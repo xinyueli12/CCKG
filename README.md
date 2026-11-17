@@ -1,5 +1,5 @@
 # CCKG
-Artifacts for the paper Clark, O., Ahmed, Z., Li, X., Joshi, K. P., Trinkoff, A., & Sun, K. (2026). A Caregiver-Centered Knowledge Graph for Clinician Well-being Risk Assessment. Accepted at the 2026 IEEE International Conference on Big Data (IEEE BigData 2026).
+Digital Artifacts for the paper Clark, O., Ahmed, Z., Li, X., Joshi, K. P., Trinkoff, A., & Sun, K. (2026). A Caregiver-Centered Knowledge Graph for Clinician Well-being Risk Assessment. Accepted at the 2026 IEEE International Conference on Big Data (IEEE BigData 2026).
 
 Code, ontology, and queries for the Clinician-Centered Knowledge Graph.
 
